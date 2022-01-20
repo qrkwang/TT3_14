@@ -605,11 +605,10 @@ const getAll = (request, response) => {
 // post_comment
 const createComment = (request,response) => {
   const id=parseInt(request.params.id);
-  // get user_id
-  const sql="Insert into post_comment (User_ID, Comment, Post_ID) values (?, ?, ?) WHERE Post_ID= "+ [id];
+  const sql="Insert into post_comment (User_ID, Comment, Post_ID) values (?, ?, ?)";
   connection.query(
     sql,
-    [request.body.comment, id],
+    [request.body.userid, request.body.comment, id],
     (error, results) => {  
       if (error) {
         throw error;

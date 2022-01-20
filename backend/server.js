@@ -60,6 +60,7 @@ app.get("/post/user/:id",db.getPostByUserID);
 app.get("/post/postbyid/:id",db.getPostByPostID);
 //
 
+// comments
 app.get("/comment/getallcomments",db.getAllComments);
 app.get("/comment/commentid/:id", db.getCommentById);
 app.get("/comment/userid/:id", db.getCommentByUserId);
