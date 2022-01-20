@@ -635,6 +635,54 @@ const updateComment = (request,response) => {
        });
 }
 
+const getAllComments = (request, response) => {
+  connection.query("SELECT * FROM post_comment", (error, results) => {
+    if (error) {
+      throw error;
+    }
+    response.status(200).json(results);
+  });
+};
+
+const getCommentById = (request, response) => {
+  const id = parseInt(request.params.id);
+  connection.query(
+    "SELECT * FROM post_comment WHERE Comment_ID = " + [id],
+    (error, results) => {     
+      if (error) {
+        throw error;
+      }
+      response.status(200).json(results);
+    }
+  );
+};
+
+const getCommentByUserId = (request, response) => {
+  const id = parseInt(request.params.id);
+  connection.query(
+    "SELECT * FROM post_comment WHERE User_ID = " + [id],
+    (error, results) => {     
+      if (error) {
+        throw error;
+      }
+      response.status(200).json(results);
+    }
+  );
+};
+
+const getCommentByPostId = (request, response) => {
+  const id = parseInt(request.params.id);
+  connection.query(
+    "SELECT * FROM post_comment WHERE Post_ID = " + [id],
+    (error, results) => {     
+      if (error) {
+        throw error;
+      }
+      response.status(200).json(results);
+    }
+  );
+};
+
 
 module.exports = {
   getCustomers,
@@ -670,5 +718,9 @@ module.exports = {
   updatePost,
   getAll,
   createComment,
-  updateComment
+  updateComment,
+  getAllComments,
+  getCommentById,
+  getCommentByUserId,
+  getCommentByPostId
 };
