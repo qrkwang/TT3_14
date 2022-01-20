@@ -7,7 +7,9 @@ function MyPost() {
     const initialValue =[ { Post_Title: '', Post_Description : '', Post_images :'' }];
 
     const [listOfUsers, setListofUsers] = useState(initialValue);
-    const { userId } = useLocation();
+    let location = useLocation();
+    const { userId } = location.state;
+
 
     useEffect(() => {
         console.log("user id", userId);
