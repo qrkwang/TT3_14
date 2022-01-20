@@ -9,7 +9,9 @@
 body {
   font-family: 'Raleway', sans-serif;
   /*background: #344a72;*/
+
   background: url('../image_resources/image_resources/home/showcase4.jpg') no-repeat center center/cover;
+  background: #344a72;
   color: #fff;
   line-height: 1.8;
 }
