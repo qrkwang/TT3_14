@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Navbar, Nav, Card } from 'react-bootstrap';
+import { Container, Navbar, Nav, Card, Stack } from 'react-bootstrap';
 // import Axios from 'axios'
 
 function Homepage() {
-    const [listOfUsers, setListofUsers] = useState([{ name: 'Michael', age: 20 }]);
+    const [listOfUsers, setListofUsers] = useState([{ name: 'Michael', age: 20 }, { name: 'John', age: 35 }]);
 
     // useEffect(() => {
     //     Axios.get('localhost:8080/post/getall')
@@ -25,14 +25,16 @@ function Homepage() {
                     </Container>
                 </Navbar>
                 <Container>
-                    {listOfUsers.map((user) => {
-                        return (
-                            <div>
-                                <h2>Name: {user.name}</h2>
-                                <p>Age: {user.age}</p>
-                            </div>
-                        );
-                    })}
+                    <Stack gap={1}>
+                        {listOfUsers.map((user) => {
+                            return (
+                                <div className='bg-light border'>
+                                    <h2>Name: {user.name}</h2>
+                                    <p>Age: {user.age}</p>
+                                </div>
+                            );
+                        })}
+                    </Stack>
                 </Container>
             </Card.Body>
         </Card>
