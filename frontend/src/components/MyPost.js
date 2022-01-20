@@ -7,10 +7,10 @@ function MyPost() {
     const initialValue =[ { Post_Title: '', Post_Description : '', Post_images :'' }];
 
     const [listOfUsers, setListofUsers] = useState(initialValue);
-    let location = useLocation();
-    const { userId } = location.state;
+    const { userId } = useLocation();
 
     useEffect(() => {
+        console.log("user id", userId);
         console.log("test");
         axios.get('http://localhost:8080/post/post/user/' + userId)
             .then(res => {

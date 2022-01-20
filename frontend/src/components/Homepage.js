@@ -10,6 +10,7 @@ function Homepage(props) {
     const [listOfUsers, setListofUsers] = useState(initialValue);
 
     useEffect(() => {
+        console.log("state ", state[0].User_ID);
         console.log("test");
         axios.get('http://localhost:8080/post/getall')
             .then(res => {
@@ -35,7 +36,7 @@ function Homepage(props) {
                                 <Nav.Link as={Link}
                                           to={{
                                               pathname: '/myposts',
-                                              state: { userId: state},
+                                              state: { userId: state[0].User_ID},
                                           }}>My Posts</Nav.Link>
                             </Nav>
                         </Navbar.Collapse>
