@@ -1,12 +1,13 @@
 import React, { useRef } from 'react';
 import { Form, Button, Card } from 'react-bootstrap'
 // import { useAuth } from '../contexts/AuthContext'
-//import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function Signup() {
     const emailRef = useRef()
     const passwordRef = useRef()
     const passwordConfirmRef = useRef()
+    const navigate = useNavigate()
     return (
         <>
             <Card>
@@ -31,6 +32,9 @@ export default function Signup() {
                     </Form>
                 </Card.Body>
             </Card>
+            <div className='w-100 text-center mt-2'>
+                Already have an account? <Link to='/login'>Log In</Link>
+            </div>
         </>
     )
 }
