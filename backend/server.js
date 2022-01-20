@@ -56,6 +56,8 @@ app.post("/review/update", db.updateHotelReview);
 app.post("/post/create", db.createPost);
 app.put("/post/update/:id", db.updatePost);
 app.get("/post/getall",db.getAll);
+app.get("/post/user/:id",db.getPostByUserID);
+app.get("/post/postbyid/:id",db.getPostByPostID);
 //
 
 app.get("/comment/getallcomments",db.getAllComments);
