@@ -29,3 +29,22 @@ exports.login = (data, callback) => {
     }
   );
 };
+
+
+
+/* testing get user data */
+
+exports.getUserData = (data, callback) => {
+  db.query(
+    `SELECT  u.firstName, u.lastName, u.emailId, u.password
+    FROM  users AS u 
+    WHERE u.id = ?`,
+    [data.userId],
+    (error, results, fields) => {
+      if (error) {
+        return callback(error);
+      }
+      return callback(null, results);
+    }
+  );
+};

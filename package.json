@@ -1,0 +1,19 @@
+{
+  "name": "tt3_14",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qrkwang/TT3_14.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/qrkwang/TT3_14/issues"
+  },
+  "homepage": "https://github.com/qrkwang/TT3_14#readme"
+}
