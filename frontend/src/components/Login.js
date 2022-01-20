@@ -11,25 +11,22 @@ export default function Login() {
     const navigate = useNavigate()
 
 
-    // async function handleSubmit(e) {
-    //     e.preventDefault()
+    function handleSubmit(e) {
+        e.preventDefault()
 
-    //     try {
-    //         setError('')
-    //         setLoading(true)
-    //         await login(emailRef.current.value, passwordRef.current.value)
-    //         navigate('/')
-    //     } catch {
-    //         setError('Failed to sign in')
-    //     } setLoading(false)
+        const user = { username: emailRef.current.value, password: passwordRef.current.value };
+        axios.post('localhost:8080/user/login', { user })
+            .then(res => {
+                console.log(res);
+                console.log(res.data);
+            })
 
-    // }
+    }
     return (
         <>
             <Card>
                 <Card.Body>
                     <h2 className='text-center mb-4'>Log In</h2>
-                    {error && <Alert variant='danger'>{error}</Alert>}
                     <Form>
                         <Form.Group id='email'>
                             <Form.Label>Email</Form.Label>
