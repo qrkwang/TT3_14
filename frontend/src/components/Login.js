@@ -19,8 +19,11 @@ export default function Login() {
         const user = { username: emailRef.current.value, password: passwordRef.current.value };
         axios.post('http://localhost:8080/user/login', user)
             .then(res => {
-                console.log(res);
-                console.log(res.data);
+                console.log(res.status);
+                if (res.status.toString()=== "200") {
+                    console.log("response code 200");
+                    navigate("/homepage", { state: res.data})
+                }
             })
 
     }

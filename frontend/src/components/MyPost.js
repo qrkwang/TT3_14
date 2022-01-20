@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Navbar, Nav, Card, Stack } from 'react-bootstrap';
 import axios from 'axios'
-import {Link, useLocation} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 
-function Homepage(props) {
-    const initialValue =[ { Post_Title: '', Post_Description : '', Post_image :'' }];
-    const { state } = useLocation();
+function MyPost() {
+    const initialValue =[ { Post_Title: '', Post_Description : '', Post_images :'' }];
 
     const [listOfUsers, setListofUsers] = useState(initialValue);
+    let location = useLocation();
+    const { userId } = location.state;
 
     useEffect(() => {
         console.log("test");
-        axios.get('http://localhost:8080/post/getall')
+        axios.get('http://localhost:8080/post/post/user/' + userId)
             .then(res => {
                 console.log(res.status);
                 if (res.status.toString()=== "200") {
@@ -24,19 +25,15 @@ function Homepage(props) {
     return (
         <Card>
             <Card.Body>
-                <Navbar bg="light" expand="lg">
+                <Navbar bg="dark" expand="lg">
                     <Container>
                         <Navbar.Brand>Social-Engagement</Navbar.Brand>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Nav className="me-auto">
+                                <Nav.Link href='/homepage'>Home </Nav.Link>
                                 <Nav.Link href='/login'>Logout</Nav.Link>
                                 <Nav.Link href="/signup">Sign Up</Nav.Link>
-                                <Nav.Link as={Link}
-                                          to={{
-                                              pathname: '/myposts',
-                                              state: { userId: state},
-                                          }}>My Posts</Nav.Link>
                             </Nav>
                         </Navbar.Collapse>
                     </Container>
@@ -62,4 +59,4 @@ function Homepage(props) {
     )
 }
 
-export default Homepage;
+export default MyPost;
