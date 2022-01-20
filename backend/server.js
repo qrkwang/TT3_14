@@ -58,12 +58,12 @@ app.put("/post/update/:id", db.updatePost);
 app.get("/post/getall",db.getAll);
 //
 
-app.get("/post/getallcomments",db.getAllComments);
+app.get("/comment/getallcomments",db.getAllComments);
 app.get("/comment/commentid/:id", db.getCommentById);
-app.post("/post/comment/:id", db.createComment);
-app.post("/comment/update/:id", db.updateComment);
 app.get("/comment/userid/:id", db.getCommentByUserId);
 app.get("/comment/postid/:id", db.getCommentByPostId);
+app.post("/comment/create/:id", db.createComment);
+app.put("/comment/update/:id", db.updateComment);
 
 app.get("/user/delete/:id", db.deleteUser);
 app.get("/booking/delete/:id", db.deleteBooking);
