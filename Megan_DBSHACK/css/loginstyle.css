@@ -1,0 +1,131 @@
+
+
+body {
+  font-family: 'Raleway', sans-serif;
+  background: #344a72;
+  /*background: url('../image_resources/image_resources/nicolas-nieves-quiroz-j4uSBFasVrA-unsplash.jpg') no-repeat center center/cover;*/
+  /*color: #fff;
+	
+  line-height: 1.8;*/
+}
+
+.container {
+	padding: 30px;
+	width: 600px;
+	background-color: #fff;
+	color:#333;
+	max-width: 1000px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+/* Full-width input fields */
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+	width: 100%;
+	padding: 15px;
+	margin: 5px 0 22px 0;
+	display: inline-block;
+	border: none;
+	background: #f1f1f1;
+	border: #ddd 1px solid;
+	border-radius: 5px;
+
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+	background-color: rgb(195, 255, 216);
+	outline: none;
+}
+
+/* Overwrite default styles of hr */
+hr {
+	border: 1px solid #f1f1f1;
+	margin-bottom: 25px;
+}
+
+/* Set a style for the submit button */
+.registerbtn {
+	background-color: #49c1a2;
+	color: #fff;
+	padding: 16px 20px;
+	margin: 8px 0;
+	border: none;
+	cursor: pointer;
+	width: 100%;
+	opacity: 0.9;
+}
+
+.registerbtn:hover {
+	opacity: 1;
+	color: black;
+}
+
+/* Add a blue text color to links */
+a {
+	color: dodgerblue;
+}
+
+/* Set a grey background color and center the text of the "sign in" section */
+.signin {
+	background-color: #f1f1f1;
+	text-align: center;
+	color: black;
+}
+
+/*next sec start here nav bar*/
+
+.navbar{
+	list-style:none;
+	margin:0;
+	padding:0;
+	background:#4c6ca0;
+	border-radius: 5px;
+	overflow: auto; /* when  float left background color missing so this line to get bg color back*/
+}
+.navbar li {
+	float: left;
+}
+.navbar li a{ 
+	display: block;
+	color:#fff;
+	text-decoration: none;
+	padding: 15px 20px; /* relatd to diaplay:block*/ 
+}
+.navbar li a:hover{
+	background-color: #446190;
+	color:#f4f4f4;
+}
+
+/* Side Menu Styling*/
+.side-menu{
+	list-style: none; /*to get rid of the bulllets*/
+	border: 1px #ddd solid;
+	border-radius: 10px;
+	width:300px; 
+	padding: 20px;
+}
+.side-menu li{
+	font-size: 18px;
+	line-height: 2.4em;
+	border-bottom:dotted 1px #ddd; /* the very translucent horizontal line*/
+}
+.side-menu li:last-child {
+	border:none; /* remove the last translucent line*/
+}
+.side-menu li a{
+	color:#333;
+ /* font-size:30px;*/
+	text-decoration: none; /*remove underline*/
+}
+.side-menu li a:hover {
+	color: coral;
+}
