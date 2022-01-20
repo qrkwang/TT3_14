@@ -26,9 +26,9 @@ function initializeConnection(config) {
 }
 var connection = initializeConnection({
   user: "root",
-  host: "127.0.0.1",
-  database: "seeddb",
-  password: "root",
+  host: "localhost",
+  database: "socialmedia",
+  password: "password",
 });
 const loginUser = (request, response) => {
   var start = performance.now();

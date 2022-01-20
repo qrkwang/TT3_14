@@ -18,11 +18,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to our dbms backend app." });
+  res.json({ message: "Welcome to our DBSSEED Backend Application." });
 });
-app.post("/customer/login", db.loginUser);
-app.get("/customer", db.getCustomers);
-app.get("/customer/:id", db.getCustomerById);
+app.post("/user/login", db.loginUser);
+app.get("/user", db.getCustomers);
+app.get("/user/:id", db.getCustomerById);
 
 app.get("/hotel/hotellistingWithDetail", db.getHotelListingWithDetails);
 app.get("/hotel/hotellistingWithDetail/:id", db.getHotelListingWithDetailsById);
