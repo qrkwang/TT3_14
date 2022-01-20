@@ -98,13 +98,13 @@ const createUser = (request, response) => {
       connection.query(
         sql,
         [
-          request.body.name,
-          request.body.age,
-          request.body.birthday,
-          request.body.email,
-          request.body.phone,
-          request.body.city,
-          request.body.country,
+          // request.body.name,
+          // request.body.age,
+          // request.body.birthday,
+          request.body.username,
+          // request.body.phone,
+          // request.body.city,
+          // request.body.country,
           hashpass,
         ],
         (error, results, fields) => {
