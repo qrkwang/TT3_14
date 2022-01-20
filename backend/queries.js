@@ -38,14 +38,11 @@ const loginUser = (request, response) => {
     .update(request.body.password)
     .digest("hex");
 
-  const sql = "Select * from customer where username = ? and password = ?";
+  const sql = "Select * from user where Email = ? and Password = ?";
   connection.query(
     sql,
     [request.body.username, hashpass],
     (error, results, fields) => {
-      var end = performance.now();
-      console.log("Time elapsed for login via SQL: " + (end - start));
-
       if (results.length > 0) {
         if (results) {
           response.status(200).json(results);
@@ -56,11 +53,9 @@ const loginUser = (request, response) => {
     }
   );
 };
-const getCustomers = (request, response) => {
+const getUsers = (request, response) => {
   var start = performance.now();
-  connection.query("SELECT * FROM customer", (error, results) => {
-    var end = performance.now();
-    console.log("Time elapsed to retrieve All Customer Data via SQL: " + (end - start));
+  connection.query("SELECT * FROM user", (error, results) => {
     if (error) {
       throw error;
     }
@@ -69,15 +64,12 @@ const getCustomers = (request, response) => {
   });
 };
 
-const getCustomerById = (request, response) => {
-  var start = performance.now();
+const getUsersById = (request, response) => {
   const id = parseInt(request.params.id);
   connection.query(
-    "SELECT * FROM customer WHERE customerid = " + [id],
+    "SELECT * FROM user WHERE USER_ID = " + [id],
     (error, results) => {
-      var end = performance.now();
-      console.log("Time elapsed to retrieve specific customer Data via SQL: " + (end - start));
-   
+
       if (error) {
         throw error;
       }
@@ -85,6 +77,41 @@ const getCustomerById = (request, response) => {
     }
   );
 };
+
+const createUser = (request, response) => {
+  var start = performance.now();
+  console.log("password is " + request.body.password);
+  var hashpass = crypto
+    .createHash("md5")
+    .update(request.body.password)
+    .digest("hex");
+  const sql = "Select * from user where Email = ?";
+  connection.query(sql, [request.body.username], (error, results, fields) => {
+    if (results.length == 0) {
+      const sql =
+        "Insert into user(Name, Age ,Birthday,Email,Phone,City,Country,Password) values (?,?,?,?,?,?,?,?)";
+      connection.query(
+        sql,
+        [
+          request.body.name,
+          request.body.age,
+          request.body.birthday,
+          request.body.email,
+          request.body.phone,
+          request.body.city,
+          request.body.country,
+          hashpass,
+        ],
+        (error, results, fields) => {
+          response.status(200).send("Success");
+        }
+      );
+    } else {
+      response.status(200).send("isExist");
+    }
+  });
+};
+
 const getHotelListing = (request, response) => {
   var start = performance.now();
   connection.query("SELECT * FROM Listing", (error, results) => {
@@ -345,38 +372,7 @@ const createBooking = (request, response) => {
   );
 };
 
-const createUser = (request, response) => {
-  var start = performance.now();
-  var hashpass = crypto
-    .createHash("md5")
-    .update(request.body.password)
-    .digest("hex");
-  const sql = "Select * from customer where username = ?";
-  connection.query(sql, [request.body.username], (error, results, fields) => {
-    if (results.length == 0) {
-      const sql =
-        "Insert into customer(name, username,password,address,contactno) values (?,?,?,?,?)";
-      connection.query(
-        sql,
-        [
-          request.body.name,
-          request.body.username,
-          hashpass,
-          request.body.address,
-          request.body.contactno,
-        ],
-        (error, results, fields) => {
-          var end = performance.now();
-          console.log("Time elapsed to create a user via SQL: " + (end - start));
-      
-          response.status(200).send("Success");
-        }
-      );
-    } else {
-      response.status(200).send("isExist");
-    }
-  });
-};
+
 
 const updateUser = (request, response) => {
   var start = performance.now();
@@ -609,7 +605,22 @@ const getAll = (request, response) => {
 // post_comment
 const createComment = (request,response) => {
   const id=parseInt(request.params.id);
-  const sql="Insert into post_comment (Comment) values (?) WHERE Post_ID= "+ [id];
+  // get user_id
+  const sql="Insert into post_comment (User_ID, Comment, Post_ID) values (?, ?, ?) WHERE Post_ID= "+ [id];
+  connection.query(
+    sql,
+    [request.body.comment, id],
+    (error, results) => {  
+      if (error) {
+        throw error;
+      }
+      response.status(200).json(results);
+       });
+}
+
+const updateCommentbyId = (request,response) => {
+  const id=parseInt(request.params.id);
+  const sql="UPDATE post_comment SET Comment=? WHERE Comment_ID= "+ [id];
   connection.query(
     sql,
     [request.body.comment],
@@ -621,7 +632,7 @@ const createComment = (request,response) => {
        });
 }
 
-const updateComment = (request,response) => {
+const updateCommentbyPostId = (request,response) => {
   const id=parseInt(request.params.id);
   const sql="UPDATE post_comment SET Comment=? WHERE Post_ID= "+ [id];
   connection.query(
@@ -635,10 +646,101 @@ const updateComment = (request,response) => {
        });
 }
 
+const updateCommentbyUserId = (request,response) => {
+  const id=parseInt(request.params.id);
+  const sql="UPDATE post_comment SET Comment=? WHERE User_ID= "+ [id];
+  connection.query(
+    sql,
+    [request.body.comment],
+    (error, results) => {  
+      if (error) {
+        throw error;
+      }
+      response.status(200).json(results);
+       });
+}
+
+
+
+const getAllComments = (request, response) => {
+  connection.query("SELECT * FROM post_comment", (error, results) => {
+    if (error) {
+      throw error;
+    }
+    response.status(200).json(results);
+  });
+};
+
+const getCommentById = (request, response) => {
+  const id = parseInt(request.params.id);
+  connection.query(
+    "SELECT * FROM post_comment WHERE Comment_ID = " + [id],
+    (error, results) => {     
+      if (error) {
+        throw error;
+      }
+      response.status(200).json(results);
+    }
+  );
+};
+
+const getCommentByUserId = (request, response) => {
+  const id = parseInt(request.params.id);
+  connection.query(
+    "SELECT * FROM post_comment WHERE User_ID = " + [id],
+    (error, results) => {     
+      if (error) {
+        throw error;
+      }
+      response.status(200).json(results);
+    }
+  );
+};
+
+const getCommentByPostId = (request, response) => {
+  const id = parseInt(request.params.id);
+  connection.query(
+    "SELECT * FROM post_comment WHERE Post_ID = " + [id],
+    (error, results) => {     
+      if (error) {
+        throw error;
+      }
+      response.status(200).json(results);
+    }
+  );
+};
+
+const getPostByUserID = (request, response) => {
+  const id = parseInt(request.params.id);
+  const sql="SELECT Post_Title,Post_Description,Post_image FROM post WHERE User_ID=" + [id];
+  connection.query(
+    sql,
+    (error, results) => {  
+      if (error) {
+        throw error;
+      }
+      response.status(200).json(results);
+       });
+      }
+
+const getPostByPostID = (request, response) => {
+  const id = parseInt(request.params.id);
+  const sql="SELECT Post_Title,Post_Description,Post_image FROM post WHERE Post_ID=" + [id];
+  connection.query(
+    sql,
+    (error, results) => {  
+      if (error) {
+        throw error;
+      }
+      response.status(200).json(results);
+        });
+      }
+
 
 module.exports = {
-  getCustomers,
-  getCustomerById,
+  loginUser,
+  getUsers,
+  getUsersById,
   getHotelListing,
   getHotelListingById,
   getHotelListingDetails,
@@ -670,5 +772,14 @@ module.exports = {
   updatePost,
   getAll,
   createComment,
-  updateComment
+  updateCommentbyId,
+  updateCommentbyPostId,
+  updateCommentbyUserId,
+  getAllComments,
+  getCommentById,
+  getCommentByUserId,
+  getCommentByPostId,
+  getPostByPostID,
+  getPostByUserID
+  
 };

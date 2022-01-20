@@ -21,8 +21,9 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to our DBSSEED Backend Application." });
 });
 app.post("/user/login", db.loginUser);
-app.get("/user", db.getCustomers);
-app.get("/user/:id", db.getCustomerById);
+app.get("/user", db.getUsers);
+app.get("/user/:id", db.getUsersById);
+app.post("/user/create", db.createUser);
 
 app.get("/hotel/hotellistingWithDetail", db.getHotelListingWithDetails);
 app.get("/hotel/hotellistingWithDetail/:id", db.getHotelListingWithDetailsById);
@@ -40,7 +41,6 @@ app.get("/booking", db.getBooking);
 app.get("/booking/:id", db.getBookingById);
 app.get("/booking/customer/:id", db.getBookingByCustomerId);
 
-app.post("/user/create", db.createUser);
 app.post("/booking/create", db.createBooking);
 app.post("/listing/create", db.createListing);
 app.post("/listingDetail/create", db.createListingDetails);
@@ -56,10 +56,18 @@ app.post("/review/update", db.updateHotelReview);
 app.post("/post/create", db.createPost);
 app.put("/post/update/:id", db.updatePost);
 app.get("/post/getall",db.getAll);
+app.get("/post/user/:id",db.getPostByUserID);
+app.get("/post/postbyid/:id",db.getPostByPostID);
 //
 
-app.post("/post/comment/:id", db.createComment);
-app.post("/comment/update/:id", db.updateComment);
+app.get("/comment/getallcomments",db.getAllComments);
+app.get("/comment/commentid/:id", db.getCommentById);
+app.get("/comment/userid/:id", db.getCommentByUserId);
+app.get("/comment/postid/:id", db.getCommentByPostId);
+app.post("/comment/create/:id", db.createComment);
+app.put("/comment/update/:id", db.updateCommentbyId);
+app.put("/comment/update/postid/:id", db.updateCommentbyPostId);
+app.put("/comment/update/userid/:id", db.updateCommentbyUserId);
 
 app.get("/user/delete/:id", db.deleteUser);
 app.get("/booking/delete/:id", db.deleteBooking);
