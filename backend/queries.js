@@ -606,6 +606,20 @@ const getAll = (request, response) => {
   });
 };
 
+const createComment = (request,response) => {
+  const id=parseInt(request.params.id);
+  const sql="Insert into post_comment(Comment) values (?) WHERE Post_ID= "+ [id];
+  connection.query(
+    sql,
+    [request.body.comment],
+    (error, results) => {  
+      if (error) {
+        throw error;
+      }
+      response.status(200).json(results);
+       });
+}
+
 module.exports = {
   getCustomers,
   getCustomerById,
@@ -638,5 +652,6 @@ module.exports = {
   getBookingByCustomerId,
   createPost,
   updatePost,
-  getAll
+  getAll,
+  createComment
 };
