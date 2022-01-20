@@ -21,8 +21,9 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to our DBSSEED Backend Application." });
 });
 app.post("/user/login", db.loginUser);
-app.get("/user", db.getCustomers);
-app.get("/user/:id", db.getCustomerById);
+app.get("/user", db.getUsers);
+app.get("/user/:id", db.getUsersById);
+app.post("/user/create", db.createUser);
 
 app.get("/hotel/hotellistingWithDetail", db.getHotelListingWithDetails);
 app.get("/hotel/hotellistingWithDetail/:id", db.getHotelListingWithDetailsById);
@@ -40,7 +41,6 @@ app.get("/booking", db.getBooking);
 app.get("/booking/:id", db.getBookingById);
 app.get("/booking/customer/:id", db.getBookingByCustomerId);
 
-app.post("/user/create", db.createUser);
 app.post("/booking/create", db.createBooking);
 app.post("/listing/create", db.createListing);
 app.post("/listingDetail/create", db.createListingDetails);
