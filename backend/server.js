@@ -63,7 +63,9 @@ app.get("/comment/commentid/:id", db.getCommentById);
 app.get("/comment/userid/:id", db.getCommentByUserId);
 app.get("/comment/postid/:id", db.getCommentByPostId);
 app.post("/comment/create/:id", db.createComment);
-app.put("/comment/update/:id", db.updateComment);
+app.put("/comment/update/:id", db.updateCommentbyId);
+app.put("/comment/update/postid/:id", db.updateCommentbyPostId);
+app.put("/comment/update/userid/:id", db.updateCommentbyUserId);
 
 app.get("/user/delete/:id", db.deleteUser);
 app.get("/booking/delete/:id", db.deleteBooking);
