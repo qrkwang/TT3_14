@@ -741,6 +741,20 @@ const getPostByPostID = (request, response) => {
         });
       }
 
+const createPostByUserID = (request,response)=>{
+  const id = parseInt(request.params.id);
+  const sql = "INSERT INTO post(Post_Title,Post_Description,Post_image,User_ID) VALUES (?,?,?,?)" ;
+  connection.query(
+    sql,
+    [request.body.title, request.body.content, request.body.images,id],
+    (error, results, fields) => {  
+      if (error) {
+        throw error;
+      }
+      response.status(200).json(results);
+        });
+}
+
 
 module.exports = {
   loginUser,
@@ -785,6 +799,6 @@ module.exports = {
   getCommentByUserId,
   getCommentByPostId,
   getPostByPostID,
-  getPostByUserID
-  
+  getPostByUserID,
+  createPostByUserID
 };
