@@ -1,4 +1,5 @@
 var crypto = require("crypto");
+const { response } = require("express");
 var mysql = require("mysql");
 const { performance } = require("perf_hooks");
 
@@ -569,6 +570,42 @@ const deleteHotelReview = (request, response) => {
     response.status(200).json(results);
   });
 };
+const createPost = (request,response)=>{
+  const sql = "Insert into post(Post_Title,Post_Description,Post_image) values (?,?,?)";
+  connection.query(
+    sql,
+    [request.body.title, request.body.content, request.body.images],
+    (error, results, fields) => {  
+      if (error) {
+        throw error;
+      }
+      response.status(200).json(results);
+       });
+}
+
+const updatePost = (request,response) => {
+  const id=parseInt(request.params.id);
+  const sql="UPDATE post SET Post_Title=?,Post_Description=?,Post_image=? WHERE Post_ID= "+ [id];
+  connection.query(
+    sql,
+    [request.body.title,request.body.content,request.body.images],
+    (error, results) => {  
+      if (error) {
+        throw error;
+      }
+      response.status(200).json(results);
+       });
+}
+
+const getAll = (request, response) => {
+  connection.query("SELECT * FROM post", (error, results) => {
+    if (error) {
+      throw error;
+    }
+    response.status(200).json(results);
+  });
+};
+
 module.exports = {
   getCustomers,
   getCustomerById,
@@ -599,4 +636,7 @@ module.exports = {
   deleteUser,
   loginUser,
   getBookingByCustomerId,
+  createPost,
+  updatePost,
+  getAll
 };

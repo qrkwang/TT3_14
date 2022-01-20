@@ -52,6 +52,12 @@ app.post("/listing/update", db.updateListing);
 app.post("/listingDetail/update", db.updateListingDetails);
 app.post("/review/update", db.updateHotelReview);
 
+//
+app.post("/post/create", db.createPost);
+app.put("/post/update/:id", db.updatePost);
+app.get("/post/getall",db.getAll);
+//
+
 app.get("/user/delete/:id", db.deleteUser);
 app.get("/booking/delete/:id", db.deleteBooking);
 app.get("/listing/delete/:id", db.deleteListing);
