@@ -65,10 +65,9 @@ const getUsers = (request, response) => {
 };
 
 const getUsersById = (request, response) => {
-  var start = performance.now();
   const id = parseInt(request.params.id);
   connection.query(
-    "SELECT * FROM user WHERE userid = " + [id],
+    "SELECT * FROM user WHERE USER_ID = " + [id],
     (error, results) => {
 
       if (error) {
