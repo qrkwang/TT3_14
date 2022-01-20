@@ -31,6 +31,10 @@ var connection = initializeConnection({
   database: "socialmedia",
   password: "password",
 });
+
+
+//Login User, will return false if user not found.
+//Password is hashed and used to execute SQL in DB.
 const loginUser = (request, response) => {
   var start = performance.now();
   var hashpass = crypto
@@ -78,6 +82,7 @@ const getUsersById = (request, response) => {
   );
 };
 
+//Create User, password is hashed and inserted into DB.
 const createUser = (request, response) => {
   var start = performance.now();
   console.log("password is " + request.body.password);
