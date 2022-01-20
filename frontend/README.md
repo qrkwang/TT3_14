@@ -1,6 +1,6 @@
 ## Tasks 
 <ol>
-  <li>Register</li>
+  <li>Signup</li>
   <li>Login</li>
   <li>Homepage</li>
   <li>Dashboard</li>
