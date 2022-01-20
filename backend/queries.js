@@ -610,7 +610,22 @@ const getAll = (request, response) => {
 // post_comment
 const createComment = (request,response) => {
   const id=parseInt(request.params.id);
-  const sql="Insert into post_comment (Comment) values (?) WHERE Post_ID= "+ [id];
+  // get user_id
+  const sql="Insert into post_comment (User_ID, Comment, Post_ID) values (?, ?, ?) WHERE Post_ID= "+ [id];
+  connection.query(
+    sql,
+    [request.body.comment, id],
+    (error, results) => {  
+      if (error) {
+        throw error;
+      }
+      response.status(200).json(results);
+       });
+}
+
+const updateCommentbyId = (request,response) => {
+  const id=parseInt(request.params.id);
+  const sql="UPDATE post_comment SET Comment=? WHERE Comment_ID= "+ [id];
   connection.query(
     sql,
     [request.body.comment],
@@ -622,7 +637,7 @@ const createComment = (request,response) => {
        });
 }
 
-const updateComment = (request,response) => {
+const updateCommentbyPostId = (request,response) => {
   const id=parseInt(request.params.id);
   const sql="UPDATE post_comment SET Comment=? WHERE Post_ID= "+ [id];
   connection.query(
@@ -635,6 +650,22 @@ const updateComment = (request,response) => {
       response.status(200).json(results);
        });
 }
+
+const updateCommentbyUserId = (request,response) => {
+  const id=parseInt(request.params.id);
+  const sql="UPDATE post_comment SET Comment=? WHERE User_ID= "+ [id];
+  connection.query(
+    sql,
+    [request.body.comment],
+    (error, results) => {  
+      if (error) {
+        throw error;
+      }
+      response.status(200).json(results);
+       });
+}
+
+
 
 const getAllComments = (request, response) => {
   connection.query("SELECT * FROM post_comment", (error, results) => {
@@ -746,7 +777,9 @@ module.exports = {
   updatePost,
   getAll,
   createComment,
-  updateComment,
+  updateCommentbyId,
+  updateCommentbyPostId,
+  updateCommentbyUserId,
   getAllComments,
   getCommentById,
   getCommentByUserId,

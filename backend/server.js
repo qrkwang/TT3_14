@@ -60,12 +60,14 @@ app.get("/post/user/:id",db.getPostByUserID);
 app.get("/post/postbyid/:id",db.getPostByPostID);
 //
 
-app.get("/post/getallcomments",db.getAllComments);
+app.get("/comment/getallcomments",db.getAllComments);
 app.get("/comment/commentid/:id", db.getCommentById);
-app.post("/post/comment/:id", db.createComment);
-app.post("/comment/update/:id", db.updateComment);
 app.get("/comment/userid/:id", db.getCommentByUserId);
 app.get("/comment/postid/:id", db.getCommentByPostId);
+app.post("/comment/create/:id", db.createComment);
+app.put("/comment/update/:id", db.updateCommentbyId);
+app.put("/comment/update/postid/:id", db.updateCommentbyPostId);
+app.put("/comment/update/userid/:id", db.updateCommentbyUserId);
 
 app.get("/user/delete/:id", db.deleteUser);
 app.get("/booking/delete/:id", db.deleteBooking);
