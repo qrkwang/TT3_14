@@ -680,6 +680,32 @@ const getCommentByPostId = (request, response) => {
   );
 };
 
+const getPostByUserID = (request, response) => {
+  const id = parseInt(request.params.id);
+  const sql="SELECT Post_Title,Post_Description,Post_image FROM post WHERE User_ID=" + [id];
+  connection.query(
+    sql,
+    (error, results) => {  
+      if (error) {
+        throw error;
+      }
+      response.status(200).json(results);
+       });
+      }
+
+const getPostByPostID = (request, response) => {
+  const id = parseInt(request.params.id);
+  const sql="SELECT Post_Title,Post_Description,Post_image FROM post WHERE Post_ID=" + [id];
+  connection.query(
+    sql,
+    (error, results) => {  
+      if (error) {
+        throw error;
+      }
+      response.status(200).json(results);
+        });
+      }
+
 
 module.exports = {
   loginUser,
@@ -720,5 +746,8 @@ module.exports = {
   getAllComments,
   getCommentById,
   getCommentByUserId,
-  getCommentByPostId
+  getCommentByPostId,
+  getPostByPostID,
+  getPostByUserID
+  
 };
