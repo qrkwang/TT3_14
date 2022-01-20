@@ -58,7 +58,7 @@ app.put("/post/update/:id", db.updatePost);
 app.get("/post/getall",db.getAll);
 app.get("/post/user/:id",db.getPostByUserID);
 app.get("/post/postbyid/:id",db.getPostByPostID);
-app.post( "/comment/create/:id",db.createPostByUserID)
+app.post( "/post/create/:id",db.createPostByUserID)
 //
 
 // comments
