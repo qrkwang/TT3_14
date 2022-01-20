@@ -59,6 +59,7 @@ app.get("/post/getall",db.getAll);
 //
 
 app.post("/post/comment/:id", db.createComment);
+app.post("/comment/update/:id", db.updateComment);
 
 app.get("/user/delete/:id", db.deleteUser);
 app.get("/booking/delete/:id", db.deleteBooking);

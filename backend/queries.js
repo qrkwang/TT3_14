@@ -606,9 +606,10 @@ const getAll = (request, response) => {
   });
 };
 
+// post_comment
 const createComment = (request,response) => {
   const id=parseInt(request.params.id);
-  const sql="Insert into post_comment(Comment) values (?) WHERE Post_ID= "+ [id];
+  const sql="Insert into post_comment (Comment) values (?) WHERE Post_ID= "+ [id];
   connection.query(
     sql,
     [request.body.comment],
@@ -619,6 +620,21 @@ const createComment = (request,response) => {
       response.status(200).json(results);
        });
 }
+
+const updateComment = (request,response) => {
+  const id=parseInt(request.params.id);
+  const sql="UPDATE post_comment SET Comment=? WHERE Post_ID= "+ [id];
+  connection.query(
+    sql,
+    [request.body.comment],
+    (error, results) => {  
+      if (error) {
+        throw error;
+      }
+      response.status(200).json(results);
+       });
+}
+
 
 module.exports = {
   getCustomers,
@@ -653,5 +669,6 @@ module.exports = {
   createPost,
   updatePost,
   getAll,
-  createComment
+  createComment,
+  updateComment
 };
