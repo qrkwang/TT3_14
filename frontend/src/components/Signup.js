@@ -13,8 +13,11 @@ export default function Signup() {
     function handleSubmit(e) {
         e.preventDefault()
 
+        console.log("password: " + passwordRef.current.value);
+
         const user = { username: emailRef.current.value, password: passwordRef.current.value };
-        axios.post('localhost:8080/user/create', { user })
+        console.log("user obj : " + user.username + " " + user.password);
+        axios.post('http://localhost:8080/user/create', user)
             .then(res => {
                 console.log(res);
                 console.log(res.data);

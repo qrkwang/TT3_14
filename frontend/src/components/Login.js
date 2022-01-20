@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { Form, Button, Card, Alert } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 export default function Login() {
     const emailRef = useRef()
@@ -14,8 +15,9 @@ export default function Login() {
     function handleSubmit(e) {
         e.preventDefault()
 
+        console.log("password" + passwordRef.current.value);
         const user = { username: emailRef.current.value, password: passwordRef.current.value };
-        axios.post('localhost:8080/user/login', { user })
+        axios.post('http://localhost:8080/user/login', user)
             .then(res => {
                 console.log(res);
                 console.log(res.data);
@@ -27,7 +29,7 @@ export default function Login() {
             <Card>
                 <Card.Body>
                     <h2 className='text-center mb-4'>Log In</h2>
-                    <Form>
+                    <Form onSubmit={handleSubmit}>
                         <Form.Group id='email'>
                             <Form.Label>Email</Form.Label>
                             <Form.Control type='email' ref={emailRef} required />
